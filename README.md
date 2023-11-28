@@ -2,13 +2,18 @@
 
 ## mapbox-gl-terminator
 
-his package enables the rendering of a solar terminator on a map created with Mapbox GL JS
+This package enables the rendering of a solar terminator on a map created with Mapbox GL JS
 
 ### Usage
 
 To render the solar terminator, you add a `TerminatorSource` to your map together with the corresponding raster layer.
 
 ```typescript
+
+import { TerminatorSource } from '@vicmartini/mapbox-gl-terminator';
+
+...
+
 const is2x = window.devicePixelRatio > 1;
 const tileSize = 256;
 const tileURL = `https://api.mapbox.com/v4/rreusser.black-marble/{z}/{x}/{y}.webp?sku={sku}&access_token=${window.ENV.MAPBOX_TOKEN}`;
@@ -43,3 +48,8 @@ map.addLayer({
   },
 });
 ```
+
+## Credits
+
+This package is based on this amazing demo created by @rreusser:
+https://github.com/rreusser/maps/tree/main/night-and-day
