@@ -28,16 +28,11 @@
     "cspell": "^6.26.3",
     "esbuild": "^0.19.5",
     "geojson": "^0.5.0",
-    "lru-cache": "^10.1.0",
     "mapbox-gl": "^2.15.0",
-    "prettier": "^2.8.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-map-gl": "^7.1.6"
+    "prettier": "^2.8.4"
   },
   "devDependencies": {
-    "@types/lru-cache": "^7.10.10",
-    "@types/react": "^18.2.39",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "tsup": "^6.7.0",

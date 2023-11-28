@@ -1,4 +1,3 @@
-import { LRUCache } from 'lru-cache';
 import TerminatorTiler from './TerminatorTiler.js';
 
 interface TerminatorSourceProps {
@@ -17,7 +16,8 @@ export default class TerminatorSource {
   private _fadeRange: [number, number];
   private _date: number;
   private _stepping: number;
-  tileBitmapCache: LRUCache<string, ImageBitmap>;
+  private _fetchMethod: (key: string) => Promise<ImageBitmap>;
+  tileBitmapCache: Map<string, ImageBitmap>;
 
   constructor({
     tileSize = 256,
@@ -29,6 +29,7 @@ export default class TerminatorSource {
   }: TerminatorSourceProps) {
     this.type = 'custom';
     this.tileSize = tileSize;
+    this._fetchMethod = fetchTileImageBitmap;
 
     const renderSize: number = is2x ? 512 : 256;
 
@@ -39,10 +40,7 @@ export default class TerminatorSource {
     this._fadeRange = fadeRange;
     this._date = date ?? Date.now();
     this._stepping = stepping;
-    this.tileBitmapCache = new LRUCache<string, ImageBitmap>({
-      max: 50,
-      fetchMethod: fetchTileImageBitmap,
-    });
+    this.tileBitmapCache = new Map();
   }
 
   clear(): void {
@@ -75,6 +73,9 @@ export default class TerminatorSource {
     y: number;
     z: number;
   }): Promise<ImageBitmap> {
+    const image =
+      this.tileBitmapCache.get(`${z}/${x}/${y}`) ??
+      (await this._fetchMethod(`${z}/${x}/${y}`));
     await this.tiler.render({
       x,
       y,
@@ -82,7 +83,7 @@ export default class TerminatorSource {
       date: this._date,
       fadeRange: this._fadeRange,
       stepping: this._stepping,
-      texture: await this.tileBitmapCache.fetch(`${z}/${x}/${y}`),
+      texture: image,
     });
     return this.tiler.getImageBitmap();
   }
