@@ -1,5 +1,5 @@
 {
-  "name": "mapbox-gl-terminator",
+  "name": "@vicmartini/mapbox-gl-terminator",
   "author": "Victor Martini",
   "version": "0.0.1",
   "type": "module",
