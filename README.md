@@ -38,15 +38,7 @@ const terminatorRenderer = new TerminatorSource({
   },
 });
 map.addSource('solar-terminator', terminatorRenderer as AnySource);
-map.addLayer({
-  id: 'solar-terminator',
-  source: 'solar-terminator',
-  type: 'raster',
-  paint: {
-    'raster-fade-duration': 0,
-    'raster-opacity': 0.9,
-  },
-});
+
 ```
 
 ## Credits
