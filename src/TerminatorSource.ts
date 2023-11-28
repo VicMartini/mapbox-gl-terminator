@@ -46,8 +46,9 @@ export default class TerminatorSource {
   }
 
   clear(): void {
-    // How is this different from this.update()?
-    this.tileBitmapCache.clear();
+    // TODO: How does this work?
+    // @ts-expect-error
+    this.upadte && this.update();
   }
 
   set fadeRange(value: [number, number]) {
